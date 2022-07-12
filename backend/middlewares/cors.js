@@ -1,10 +1,16 @@
-// const allowedCors = [
-//   'https://novo.nomoredomains.xyz',
-//   'http://novo.nomoredomains.xyz',
-//   'localhost:3000',
-// ];
+const cors = require('cors');
 
-module.exports = ((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+const allowedCors = {
+  origin: '*',
+  credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
+
+module.exports = cors(allowedCors);
+
+// origin: [
+//   'https://msprod.nomoredomains.xyz',
+//   'http://msprod.nomoredomains.xyz',
+//   'http://localhost:3000',
+//   'http://localhost:3001',
+// ],

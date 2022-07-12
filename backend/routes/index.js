@@ -40,8 +40,8 @@ router
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
       avatar: Joi.string().uri().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/),
-      email: Joi.string().required().email(),
       password: Joi.string().required(),
+      email: Joi.string().required().email(),
     }),
   }), createUser)
   .use(auth)

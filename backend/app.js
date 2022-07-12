@@ -47,6 +47,9 @@ const limiter = rateLimit({
   max: 100,
 });
 
+//* Обрабатывает CORS запроса
+app.use(cors);
+
 //* Обрабатываем количество запросов к серверу
 app.use(limiter);
 
@@ -55,10 +58,6 @@ app.use(helmet());
 
 //* Обрабатываем тело запроса через модуль body-parser
 app.use(bodyParser.json());
-
-//* Обрабатывает CORS запроса
-app.use(cors);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //* Обрабатываем куки через модуль cookie-parser

@@ -13,7 +13,8 @@ class Auth {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ password, email })
+      body: JSON.stringify({ password, email }),
+      credentials: 'include'
     })
       .then(this._checkResponse)
   };
@@ -22,7 +23,7 @@ class Auth {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ password, email })
+      body: JSON.stringify({ password, email }),
     })
       .then(this._checkResponse)
   };
@@ -30,19 +31,21 @@ class Auth {
   checkToken(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers = {
-        ...this._headers,
-        'Authorization': `Bearer ${token}`
-      }
+      // headers: this._headers = {
+      //   ...this._headers,
+      //   'Authorization': `Bearer ${token}`
+      // }
     })
       .then(this._checkResponse)
   }
 }
 
 export const auth = new Auth({
-  baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: 'http://localhost:3000',
+  // credentials: true,
   headers: {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Credentials': true,
   }
 });

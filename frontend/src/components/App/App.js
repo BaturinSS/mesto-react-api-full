@@ -258,7 +258,7 @@ function App() {
     setIsDownload(true);
     auth
       .register(password, email)
-      .then(({ data }) => {
+      .then((data) => {
         setIsButtonDisabled(false)
         setIsOpenPopupMessage(true);
         setIsEmail(data.email);
@@ -280,8 +280,7 @@ function App() {
     setIsDownload(true);
     auth
       .authorize(password, email)
-      .then(({ token }) => {
-        localStorage.setItem("jwt", token);
+      .then(() => {
         setIsButtonDisabled(false)
         history.push('/');
         setIsLoggedIn(true);
