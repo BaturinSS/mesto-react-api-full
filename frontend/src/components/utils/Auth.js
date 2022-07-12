@@ -12,6 +12,7 @@ class Auth {
   register(password, email) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({ password, email }),
     })
@@ -21,6 +22,7 @@ class Auth {
   authorize(password, email) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({ password, email }),
     })
