@@ -92,6 +92,6 @@ export const api = new Api({
   credentials: true,
   headers: {
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Credentials': true,
   }
 });
