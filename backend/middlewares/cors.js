@@ -1,26 +1,24 @@
 const cors = require('cors');
 
-const allowlist = () => {
+let allowlist = [
+  'https://server-mesto.ru',
+  'https://www.server-mesto.ru',
+];
+
+const list = () => {
   const { NODE_ENV } = process.env;
-  let list = [];
   if (NODE_ENV) {
-    list = [
-      'https://server-mesto.ru',
-      'https://www.server-mesto.ru',
-    ];
-  } else {
-    list = [
-      'https://server-mesto.ru',
-      'https://www.server-mesto.ru',
+    allowlist = [
+      ...allowlist,
       'http://localhost:3000',
       'http://localhost:3001',
     ];
   }
-  return list;
+  return allowlist;
 };
 
 const allowedCors = {
-  origin: allowlist(),
+  origin: list(),
   credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
