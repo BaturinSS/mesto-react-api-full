@@ -14,7 +14,6 @@ class Auth {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ password, email }),
-      // credentials: 'include'
     })
       .then(this._checkResponse)
   };
@@ -42,10 +41,7 @@ class Auth {
 
 export const auth = new Auth({
   baseUrl: 'http://api.server-mesto.ru',
-  // credentials: true,
   headers: {
-    // 'Accept': 'application/json',
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Credentials': true,
   }
 });

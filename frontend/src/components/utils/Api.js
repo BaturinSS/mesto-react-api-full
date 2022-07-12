@@ -41,7 +41,6 @@ class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({ name, link }),
     })
@@ -88,9 +87,8 @@ class Api {
 
 export const api = new Api({
   baseUrl: 'http://api.server-mesto.ru',
-  // credentials: true,
+  credentials: true,
   headers: {
-    // 'authorization': 'ef26a870-ce14-4ae0-b138-67948bcf24ea',
     'Content-Type': 'application/json',
     // 'Access-Control-Allow-Credentials': true,
   }
