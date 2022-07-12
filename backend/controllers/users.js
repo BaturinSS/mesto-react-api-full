@@ -138,8 +138,8 @@ module.exports.login = (req, res, next) => {
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          secure: true,
-          sameSite: true,
+          // secure: true,
+          // sameSite: true,
         })
         .send({ message: 'Всё верно!' });
     })

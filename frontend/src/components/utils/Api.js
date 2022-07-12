@@ -13,7 +13,8 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -21,7 +22,8 @@ class Api {
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -29,8 +31,9 @@ class Api {
   editUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify({ name, about })
+      body: JSON.stringify({ name, about }),
     })
       .then(this._checkResponse)
   }
@@ -38,8 +41,9 @@ class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify({ name, link })
+      body: JSON.stringify({ name, link }),
     })
       .then(this._checkResponse)
   }
@@ -47,7 +51,8 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
@@ -55,6 +60,7 @@ class Api {
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -63,6 +69,7 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -71,8 +78,9 @@ class Api {
   editAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify({ avatar })
+      body: JSON.stringify({ avatar }),
     })
       .then(this._checkResponse)
   }
