@@ -47,6 +47,9 @@ const limiter = rateLimit({
   max: 100,
 });
 
+//* Обрабатывает CORS запроса OPTIONS
+app.options('*', cors);
+
 //* Обрабатывает CORS запроса
 app.use(cors);
 
