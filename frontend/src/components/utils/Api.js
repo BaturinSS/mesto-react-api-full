@@ -79,7 +79,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://api.server-mesto.ru',
   // credentials: true,
   headers: {
     // 'authorization': 'ef26a870-ce14-4ae0-b138-67948bcf24ea',

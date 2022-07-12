@@ -41,7 +41,7 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://api.server-mesto.ru',
   // credentials: true,
   headers: {
     'Accept': 'application/json',
