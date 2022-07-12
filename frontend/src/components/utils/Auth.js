@@ -40,7 +40,7 @@ class Auth {
 }
 
 export const auth = new Auth({
-  baseUrl: 'http://api.server-mesto.ru',
+  baseUrl: 'https://api.server-mesto.ru',
   headers: {
     'Content-Type': 'application/json',
   }

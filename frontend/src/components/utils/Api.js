@@ -86,7 +86,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://api.server-mesto.ru',
+  baseUrl: 'https://api.server-mesto.ru',
   credentials: true,
   headers: {
     'Content-Type': 'application/json',
