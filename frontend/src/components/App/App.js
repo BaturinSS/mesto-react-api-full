@@ -45,20 +45,21 @@ function App() {
 
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
-
-    auth
-      .checkToken(jwt)
-      .then((data) => {
-        setIsEmail(data.email);
-        setIsLoggedIn(true);
-        history.push('/');
-      })
-      .catch((err) => {
-        err
-          .then(({ message }) => {
-            console.log(`Ошибка токена "${message}"`)
-          })
-      })
+    if (isLoggedIn) {
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          setIsEmail(data.email);
+          setIsLoggedIn(true);
+          history.push('/');
+        })
+        .catch((err) => {
+          err
+            .then(({ message }) => {
+              console.log(`Ошибка токена "${message}"`)
+            })
+        })
+    }
   }
 
   const handleExit = () => {
