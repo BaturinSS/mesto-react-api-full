@@ -4,9 +4,9 @@ import imageBasket from '../../images/delete.svg';
 import { TranslationContext } from '../../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
-
+  console.log('card', card)
   const currentUser = useContext(TranslationContext);
-
+  console.log('currentUser', currentUser)
   const isOwn = card.owner._id === currentUser._id;
 
   const isLiked = card.likes.some(i => i._id === currentUser._id);

@@ -7,7 +7,7 @@ let allowlist = [
 
 const list = () => {
   const { NODE_ENV } = process.env;
-  if (NODE_ENV) {
+  if (!NODE_ENV) {
     allowlist = [
       ...allowlist,
       'http://localhost:3000',
