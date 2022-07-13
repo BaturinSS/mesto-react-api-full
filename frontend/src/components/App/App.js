@@ -42,8 +42,8 @@ function App() {
     selectedCard ||
     isConfirmDeletePopupOpen ||
     isOpenPopupMessage
-  const { NODE_ENV, JWT_SECRET, URL_CORS } = process.env;
-  console.log('NODE_ENV,JWT_SECRET,URL_CORS', NODE_ENV, JWT_SECRET, URL_CORS)
+  const { NODE_ENV } = process.env;
+  console.log('переменные окружения', NODE_ENV);
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -115,17 +115,17 @@ function App() {
 
   useEffect(() => {
     if (!isOpen) return;
-    function handleOverley(event) {
+    function handleOverlay(event) {
       if (event.target.classList.contains('popup_opened') || event.target.classList.contains('popup__image-cross')) {
         closeAllPopups();
       }
     };
-    document.addEventListener("mousedown", handleOverley);
-    return () => document.removeEventListener("mousedown", handleOverley);
+    document.addEventListener("mousedown", handleOverlay);
+    return () => document.removeEventListener("mousedown", handleOverlay);
   }, [isOpen]);
 
   const handleEditAvatarClick = () => {
-    setIsButtonDisabled(false)
+    setIsButtonDisabled(false);
     setIsEditAvatarPopupOpen(true);
     setIsValidFormRegister(false);
   };

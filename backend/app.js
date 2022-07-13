@@ -47,6 +47,9 @@ const limiter = rateLimit({
   max: 100,
 });
 
+// const { REACT_APP_JWT_SECRET, REACT_APP_URL_CORS, NODE_ENV } = process.env;
+// console.log('NODE_ENV,JWT_SECRET,URL_CORS', REACT_APP_JWT_SECRET, REACT_APP_URL_CORS, NODE_ENV);
+
 //* Обрабатывает CORS запроса OPTIONS
 app.options('*', cors);
 

@@ -1,8 +1,19 @@
 class Api {
-  constructor({ baseUrl, headers, credentials }) {
-    this._baseUrl = baseUrl;
+  constructor({ productionUrl, headers, credentials }) {
+    this._productionUrl = productionUrl;
     this._headers = headers;
     this._credentials = credentials;
+  }
+
+  _baseUrl = () => {
+    const { NODE_ENV } = process.env;
+    let url = '';
+    if (NODE_ENV === 'development') {
+      url = 'http://localhost:3000';
+    } else if (NODE_ENV === 'production') {
+      url = this._productionUrl;
+    };
+    return url;
   }
 
   _checkResponse(res) {
@@ -12,7 +23,7 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl()}/users/me`, {
       method: 'GET',
       credentials: this._credentials,
       headers: this._headers,
@@ -21,7 +32,7 @@ class Api {
   }
 
   getCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl()}/cards`, {
       method: 'GET',
       credentials: this._credentials,
       headers: this._headers,
@@ -30,7 +41,7 @@ class Api {
   }
 
   editUserInfo(name, about) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl()}/users/me`, {
       method: 'PATCH',
       credentials: this._credentials,
       headers: this._headers,
@@ -40,7 +51,7 @@ class Api {
   }
 
   addCard(name, link) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl()}/cards`, {
       method: 'POST',
       credentials: this._credentials,
       headers: this._headers,
@@ -50,7 +61,7 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+    return fetch(`${this._baseUrl()}/cards/${id}`, {
       method: 'DELETE',
       credentials: this._credentials,
       headers: this._headers,
@@ -59,7 +70,7 @@ class Api {
   }
 
   addLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return fetch(`${this._baseUrl()}/cards/${id}/likes`, {
       method: 'PUT',
       credentials: this._credentials,
       headers: this._headers
@@ -68,7 +79,7 @@ class Api {
   }
 
   deleteLike(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+    return fetch(`${this._baseUrl()}/cards/${id}/likes`, {
       method: 'DELETE',
       credentials: this._credentials,
       headers: this._headers
@@ -77,7 +88,7 @@ class Api {
   }
 
   editAvatar(avatar) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl()}/users/me/avatar`, {
       method: 'PATCH',
       credentials: this._credentials,
       headers: this._headers,
@@ -88,8 +99,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3000',
-  // baseUrl: 'https://api.server-mesto.ru',
+  productionUrl: 'https://api.server-mesto.ru',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
