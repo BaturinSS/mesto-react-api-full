@@ -8,10 +8,10 @@ class Api {
   _baseUrl = () => {
     const { NODE_ENV } = process.env;
     let url = '';
-    if (NODE_ENV === 'development') {
-      url = 'http://localhost:3000';
-    } else if (NODE_ENV === 'production') {
+    if (NODE_ENV === 'production') {
       url = this._productionUrl;
+    } else {
+      url = 'http://localhost:3000';
     };
     return url;
   }
@@ -102,6 +102,7 @@ export const api = new Api({
   productionUrl: 'https://api.server-mesto.ru',
   credentials: 'include',
   headers: {
+    'authorization': `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json',
   }
 });

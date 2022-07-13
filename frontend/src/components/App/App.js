@@ -42,22 +42,23 @@ function App() {
     selectedCard ||
     isConfirmDeletePopupOpen ||
     isOpenPopupMessage
-  const { NODE_ENV } = process.env;
-  console.log('переменные окружения', NODE_ENV);
+
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
+      console.log('app front 49', jwt)
       auth
         .checkToken(jwt)
-        .then(({ data }) => {
+        .then((data) => {
           setIsEmail(data.email);
           setIsLoggedIn(true);
           history.push('/');
         })
         .catch((err) => {
-          err.then(({ message }) => {
-            console.log(`Ошибка токена "${message}"`)
-          })
+          err
+            .then(({ message }) => {
+              console.log(`Ошибка токена "${message}"`)
+            })
         })
     }
   }
@@ -67,7 +68,7 @@ function App() {
     setIsLoggedIn(false);
     history.push('/sign-in');
   }
-
+  //////////////////////!
   useEffect(() => {
     handleTokenCheck();
     if (isLoggedIn) {
@@ -78,12 +79,12 @@ function App() {
         })
         .catch((err) => {
           err.then(({ message }) => {
-            alert(message)
+            console.log(message)
           })
         })
     }
   }, [isLoggedIn]);
-
+  //////////////////////!
   useEffect(() => {
     if (isLoggedIn) {
       api
@@ -281,7 +282,8 @@ function App() {
     setIsDownload(true);
     auth
       .authorize(password, email)
-      .then(() => {
+      .then(({ token }) => {
+        localStorage.setItem("jwt", token);
         setIsButtonDisabled(false)
         history.push('/');
         setIsLoggedIn(true);

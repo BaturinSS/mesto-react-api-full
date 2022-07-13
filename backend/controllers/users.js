@@ -123,31 +123,35 @@ module.exports.createUser = (req, res, next) => {
 //* Контроллер аутентификации(вход в приложение)
 //* router.post('/sign-in', login)
 module.exports.login = (req, res, next) => {
-  const { NODE_ENV, JWT_SECRET, URL_CORS } = process.env;
-  console.log(URL_CORS);
+  const { NODE_ENV, JWT_SECRET } = process.env;
   User
     .findUserByCredentials(req.body)
     .then((user) => {
+      const production = NODE_ENV === 'production';
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production'
+        production
           ? JWT_SECRET
           : 'b83c3dde3d27152bd25553962',
         { expiresIn: '7d' },
       );
-      res
-        .cookie('jwt', token, {
+      if (production) {
+        res.cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           secure: true,
           sameSite: 'none',
-        })
-        .send({ message: 'Всё верно!' });
+        });
+      } else {
+        res.send({ token });
+      }
+      res.send({ message: 'Всё верно!' });
     })
     .catch(next);
 };
 module.exports.getUserInfo = (req, res, next) => {
-  User.findById(req.user._id)
+  User
+    .findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError(textErrorNoUser);

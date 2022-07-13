@@ -1,6 +1,9 @@
 //* Импортируем модуль jsonwebtoken для верификации токена
 const jwt = require('jsonwebtoken');
 
+//* Подключаем модуль для проверки данных на тип
+const validator = require('validator');
+
 //* Импорт констант
 const { textErrorAuthRequired } = require('../utils/constants');
 
@@ -10,11 +13,35 @@ const AuthError = require('../errors/AuthError');
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { NODE_ENV, JWT_SECRET } = process.env;
-  const token = req.cookies.jwt;
-  if (!token) {
-    throw (new AuthError(textErrorAuthRequired));
+
+  let token;
+
+  const checkedTokenCookies = () => {
+    const tokenJwt = req.cookies.jwt;
+    const validToken = validator.isJWT(tokenJwt);
+    if (!tokenJwt || !validToken) {
+      throw (new AuthError(textErrorAuthRequired));
+    }
+    token = tokenJwt;
+  };
+
+  const checkedTokenHeaders = () => {
+    const { authorization } = req.headers;
+    if (!authorization || !authorization.startsWith('Bearer ')) {
+      throw (new AuthError(textErrorAuthRequired));
+    }
+    token = authorization.replace(/^\S+/, '').trim();
+    console.log('auth back 34', token);
+  };
+
+  if (NODE_ENV) {
+    checkedTokenCookies();
+  } else {
+    checkedTokenHeaders();
   }
+
   let payload;
+
   try {
     payload = jwt.verify(
       token,
@@ -25,6 +52,8 @@ module.exports = (req, res, next) => {
   } catch (err) {
     next(new AuthError(textErrorAuthRequired));
   }
+
   req.user = payload;
+
   next();
 };
