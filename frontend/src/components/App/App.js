@@ -282,21 +282,22 @@ function App() {
     auth
       .authorize(password, email)
       .then(({ token }) => {
+        console.log(token);
         localStorage.setItem("jwt", token);
-        setIsButtonDisabled(false)
+        setIsButtonDisabled(false);
         history.push('/');
         setIsLoggedIn(true);
       })
       .catch((err) => {
         err.then(({ message }) => {
-          setIsButtonDisabled(false)
+          setIsButtonDisabled(false);
           setIsOpenPopupMessage(true);
-          setIsLoggedIn(false)
-          setIsRegister(false)
+          setIsLoggedIn(false);
+          setIsRegister(false);
           console.log(`Ошибка входа ${message}`)
-        })
+        });
       })
-      .finally(() => setIsDownload(false))
+      .finally(() => setIsDownload(false));
   }
 
   return (
