@@ -46,7 +46,6 @@ function App() {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      console.log('app front 49', jwt)
       auth
         .checkToken(jwt)
         .then((data) => {
