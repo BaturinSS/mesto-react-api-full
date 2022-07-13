@@ -44,6 +44,7 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
+    console.log('lf nen')
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth
