@@ -2,8 +2,7 @@ const cors = require('cors');
 
 const { NODE_ENV, URL_CORS } = process.env;
 
-let allowlist = URL_CORS;
-
+let allowlist = URL_CORS.split(', ');
 const list = () => {
   if (!NODE_ENV) {
     allowlist = 'http://localhost:3106';
