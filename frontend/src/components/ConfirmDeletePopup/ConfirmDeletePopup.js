@@ -25,7 +25,7 @@ function ConfirmDeletePopup({
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isButtonDisabled={isButtonDisabled}
-      isValidForm={!isValidForm}
+      isValidForm={true}
     >
     </PopupWithForm>
   )

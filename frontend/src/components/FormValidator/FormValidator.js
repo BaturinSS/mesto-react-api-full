@@ -12,15 +12,15 @@ function FormValidator() {
   const [isErrorMessage, setIsErrorMessage] = useState({})
 
   useEffect(() => {
-    const popupActiv = document.querySelector('.onValiddator');
+    const popupActive = document.querySelector('.onValiddator');
 
-    if (popupActiv) {
-      const formActivPopup = popupActiv.querySelector('form');
+    if (popupActive) {
+      const formActivePopup = popupActive.querySelector('form');
 
-      if (!formActivPopup) {
+      if (!formActivePopup) {
         return
       } else {
-        setIsValidForm(formActivPopup.checkValidity());
+        setIsValidForm(formActivePopup.checkValidity());
       }
     }
 
