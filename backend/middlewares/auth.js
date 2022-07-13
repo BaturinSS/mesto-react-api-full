@@ -18,7 +18,9 @@ module.exports = (req, res, next) => {
 
   const checkedTokenCookies = () => {
     const tokenJwt = req.cookies.jwt;
+    console.log('tokenJwt back 21 auth', tokenJwt);
     const validToken = validator.isJWT(tokenJwt);
+    console.log('validToken back 23 auth', validToken);
     if (!tokenJwt || !validToken) {
       throw (new AuthError(textErrorAuthRequired));
     }
