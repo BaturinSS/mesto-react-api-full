@@ -31,7 +31,6 @@ module.exports = (req, res, next) => {
       throw (new AuthError(textErrorAuthRequired));
     }
     token = authorization.replace(/^\S+/, '').trim();
-    console.log('auth back 34', token);
   };
 
   if (NODE_ENV) {
