@@ -123,7 +123,8 @@ module.exports.createUser = (req, res, next) => {
 //* Контроллер аутентификации(вход в приложение)
 //* router.post('/sign-in', login)
 module.exports.login = (req, res, next) => {
-  const { NODE_ENV, JWT_SECRET } = process.env;
+  const { NODE_ENV, JWT_SECRET, URL_CORS } = process.env;
+  console.log(URL_CORS);
   User
     .findUserByCredentials(req.body)
     .then((user) => {

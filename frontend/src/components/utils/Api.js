@@ -88,7 +88,8 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://api.server-mesto.ru',
+  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://api.server-mesto.ru',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',

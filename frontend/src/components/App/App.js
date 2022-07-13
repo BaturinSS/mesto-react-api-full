@@ -42,7 +42,8 @@ function App() {
     selectedCard ||
     isConfirmDeletePopupOpen ||
     isOpenPopupMessage
-
+  const { NODE_ENV, JWT_SECRET, URL_CORS } = process.env;
+  console.log('NODE_ENV,JWT_SECRET,URL_CORS', NODE_ENV, JWT_SECRET, URL_CORS)
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
