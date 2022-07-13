@@ -44,23 +44,21 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
-    console.log('lf nen')
     const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((data) => {
-          setIsEmail(data.email);
-          setIsLoggedIn(true);
-          history.push('/');
-        })
-        .catch((err) => {
-          err
-            .then(({ message }) => {
-              console.log(`Ошибка токена "${message}"`)
-            })
-        })
-    }
+
+    auth
+      .checkToken(jwt)
+      .then((data) => {
+        setIsEmail(data.email);
+        setIsLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err) => {
+        err
+          .then(({ message }) => {
+            console.log(`Ошибка токена "${message}"`)
+          })
+      })
   }
 
   const handleExit = () => {

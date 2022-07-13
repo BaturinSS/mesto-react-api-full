@@ -13,7 +13,7 @@ const AuthError = require('../errors/AuthError');
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { NODE_ENV, JWT_SECRET } = process.env;
-  console.log(NODE_ENV);
+
   let token;
 
   const checkedTokenCookies = () => {
