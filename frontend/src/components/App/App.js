@@ -282,8 +282,9 @@ function App() {
     auth
       .authorize(password, email)
       .then(({ token }) => {
-        console.log(token);
-        localStorage.setItem("jwt", token);
+        if (token) {
+          localStorage.setItem("jwt", token);
+        }
         setIsButtonDisabled(false);
         history.push('/');
         setIsLoggedIn(true);
