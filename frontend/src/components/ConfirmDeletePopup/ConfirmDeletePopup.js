@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import FormValidator from "../FormValidator/FormValidator";
 
 function ConfirmDeletePopup({
   isOpen,
@@ -10,7 +9,6 @@ function ConfirmDeletePopup({
   setIsButtonDisabled,
   isButtonDisabled
 }) {
-  const { isValidForm } = FormValidator();
 
   function handleSubmit(event) {
     event.preventDefault();
