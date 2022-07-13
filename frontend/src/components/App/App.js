@@ -67,7 +67,7 @@ function App() {
     setIsLoggedIn(false);
     history.push('/sign-in');
   }
-  //////////////////////!
+
   useEffect(() => {
     handleTokenCheck();
     if (isLoggedIn) {
@@ -78,12 +78,12 @@ function App() {
         })
         .catch((err) => {
           err.then(({ message }) => {
-            console.log(message)
+            alert(message)
           })
         })
     }
   }, [isLoggedIn]);
-  //////////////////////!
+
   useEffect(() => {
     if (isLoggedIn) {
       api
@@ -204,7 +204,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     const changeLikeCardStatus =
       !isLiked

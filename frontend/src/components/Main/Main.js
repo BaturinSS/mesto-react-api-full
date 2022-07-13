@@ -32,7 +32,7 @@ function Main({
       </section>
       <section className="elements">
         <ul className="elements__cards">
-          {cards.map(card => {
+          {cards.slice().reverse().map(card => {
             return (
               <Card
                 key={card._id}

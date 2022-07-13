@@ -102,7 +102,7 @@ export const api = new Api({
   productionUrl: 'https://api.server-mesto.ru',
   credentials: 'include',
   headers: {
-    'authorization': `Bearer ${localStorage.getItem('token')}`,
+    'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   }
