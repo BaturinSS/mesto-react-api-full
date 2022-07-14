@@ -134,7 +134,7 @@ module.exports.login = (req, res, next) => {
         { _id: user._id },
         production
           ? JWT_SECRET
-          : 'b83c3dde3d27152bd25553962',
+          : 'keyword-for-token-generation',
         { expiresIn: '7d' },
       );
       if (production) {
