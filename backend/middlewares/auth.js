@@ -1,8 +1,8 @@
 //* Импортируем модуль jsonwebtoken для верификации токена
 const jwt = require('jsonwebtoken');
 
-//* Подключаем модуль для проверки данных на тип
-const validator = require('validator');
+// //* Подключаем модуль для проверки данных на тип
+// const validator = require('validator');
 
 //* Импорт констант
 const { textErrorAuthRequired } = require('../utils/constants');
@@ -18,8 +18,7 @@ module.exports = (req, res, next) => {
 
   const checkedTokenCookies = () => {
     const tokenJwt = req.cookies.jwt;
-    const validToken = validator.isJWT(tokenJwt);
-    if (!tokenJwt || !validToken) {
+    if (!tokenJwt) {
       throw (new AuthError(textErrorAuthRequired));
     }
     token = tokenJwt;
