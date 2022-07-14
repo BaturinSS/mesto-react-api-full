@@ -53,7 +53,7 @@ function Header({
             className="header__menu"
             onClick={openedMenuMobile}
             style={!isOpenMenuMobile
-              ? { display: "block" }
+              ? { disply: "flex" }
               : { display: "none" }
             }
           >

@@ -301,18 +301,18 @@ function App() {
     auth
       .register(password, email)
       .then((data) => {
-        setIsButtonDisabled(false)
+        setIsButtonDisabled(false);
         setIsOpenPopupMessage(true);
         setIsEmail(data.email);
         history.push('/sign-in');
-        setIsRegister(true)
+        setIsRegister(true);
       })
       .catch((err) => {
         err.then(({ message }) => {
           setIsButtonDisabled(false)
           setIsOpenPopupMessage(true);
-          setIsRegister(false)
-          alert(message)
+          setIsRegister(false);
+          alert(message);
         })
       })
       .finally(() => setIsDownload(false))
@@ -323,10 +323,9 @@ function App() {
     auth
       .authorize(password, email)
       .then((data) => {
-        const { token, message } = data;
+        const { token } = data;
         if (token) {
           localStorage.setItem("jwt", token);
-          console.log(message);
         };
         setIsButtonDisabled(false);
         history.push('/');
