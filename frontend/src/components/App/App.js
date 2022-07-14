@@ -318,9 +318,10 @@ function App() {
     setIsDownload(true);
     auth
       .authorize(password, email)
-      .then(({ token }) => {
+      .then(({ token, message }) => {
         if (token) {
           localStorage.setItem("jwt", token);
+          console.log(message);
           setIsButtonDisabled(false);
           history.push('/');
           setIsLoggedIn(true);

@@ -138,14 +138,16 @@ module.exports.login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       if (production) {
-        res.cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-          secure: true,
-          sameSite: 'none',
-        });
+        res
+          .cookie('jwt', token, {
+            maxAge: 3600000 * 24 * 7,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+          })
+          .send({ message: 'Все верно!' });
       } else {
-        res.send({ token });
+        res.send({ token, message: 'Все верно!' });
       }
     })
     .catch(next);
@@ -170,11 +172,7 @@ module.exports.getUserInfo = (req, res, next) => {
 module.exports.deleteTokenUser = (req, res, next) => {
   try {
     res
-      .cookie('jwt', '', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-      })
+      .clearCookie('jwt')
       .send({ message: 'Вы вышли!' });
   } catch (err) {
     next(new InternalServerError(textErrorInternalServer));
