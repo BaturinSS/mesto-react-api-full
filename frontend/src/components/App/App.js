@@ -34,7 +34,7 @@ function App() {
   const [isEmail, setIsEmail] = useState('')
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
-  const [isValidFormRegister, setIsValidFormRegister] = useState(true)
+  const [isValidFormRegister, setIsValidFormRegister] = useState(true);
   const isOpen =
     isEditAvatarPopupOpen ||
     isEditProfilePopupOpen ||
@@ -44,8 +44,9 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
+    const { NODE_ENV } = process.env;
     const jwt = localStorage.getItem('jwt');
-    if (isLoggedIn) {
+    if (jwt || NODE_ENV === 'production') {
       auth
         .checkToken(jwt)
         .then((data) => {
@@ -54,16 +55,30 @@ function App() {
           history.push('/');
         })
         .catch((err) => {
-          err
-            .then(({ message }) => {
-              console.log(`Ошибка токена "${message}"`)
-            })
+          err.then(({ message }) => {
+            console.log(`Ошибка токена "${message}"`)
+          })
         })
     }
   }
 
   const handleExit = () => {
-    localStorage.removeItem("jwt");
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      localStorage.removeItem("jwt");
+    } else {
+      auth
+        .deleteToken()
+        .then(({ message }) => {
+          console.log(`${message}`);
+        })
+        .catch((err) => {
+          err.then(({ message }) => {
+            console.log(`Ошибка токена "${message}"`);
+          })
+        })
+    }
+
     setIsLoggedIn(false);
     history.push('/sign-in');
   }

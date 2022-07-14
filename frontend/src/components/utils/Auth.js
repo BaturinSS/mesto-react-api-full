@@ -51,8 +51,17 @@ class Auth {
         'Authorization': `Bearer ${token}`
       }
     })
-      .then(this._checkResponse)
-  }
+      .then(this._checkResponse);
+  };
+
+  deleteToken() {
+    return fetch(`${this._baseUrl()}/users/me`, {
+      method: 'DELETE',
+      credentials: this._credentials,
+      headers: this._headers,
+    })
+      .then(this._checkResponse);
+  };
 }
 
 export const auth = new Auth({

@@ -7,7 +7,7 @@ const { celebrate, Joi } = require('celebrate');
 //* Импорт функций controllers
 const {
   getUsers, getUser, getUserInfo,
-  updateUser, updateUserAvatar,
+  updateUser, updateUserAvatar, deleteTokenUser,
 } = require('../controllers/users');
 
 //* Принимаем запросы /users
@@ -29,7 +29,8 @@ router
     body: Joi.object().keys({
       avatar: Joi.string().required().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/),
     }),
-  }), updateUserAvatar);
+  }), updateUserAvatar)
+  .delete('/me', deleteTokenUser);
 
 //* Экспортировали роутер
 module.exports = router;

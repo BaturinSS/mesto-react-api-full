@@ -9,7 +9,7 @@ const User = require('../models/user');
 
 //* Импорт констант
 const {
-  codCreated, textErrorNoUser,
+  codCreated, textErrorNoUser, textErrorInternalServer,
   textErrorValidation, textErrorConflict,
 } = require('../utils/constants');
 
@@ -21,6 +21,8 @@ const ValidationError = require('../errors/ValidationError');
 
 //* Импорт классового элемента ошибки
 const ConflictError = require('../errors/ConflictError');
+
+const InternalServerError = require('../errors/InternalServerError');
 
 //* Экспорт функций в routes
 module.exports.getUsers = (req, res, next) => {
@@ -166,4 +168,17 @@ module.exports.getUserInfo = (req, res, next) => {
         next(err);
       }
     });
+};
+module.exports.deleteTokenUser = (req, res, next) => {
+  try {
+    res
+      .cookie('jwt', '', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+      })
+      .send({ message: 'Вы вышли!' });
+  } catch (err) {
+    next(new InternalServerError(textErrorInternalServer));
+  }
 };
