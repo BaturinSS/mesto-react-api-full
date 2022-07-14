@@ -18,8 +18,8 @@ module.exports = (req, res, next) => {
 
   const checkedTokenCookies = () => {
     const tokenJwt = req.cookies.jwt;
-    // const validToken = validator.isJWT(tokenJwt);
-    if (!tokenJwt) {
+    const validToken = validator.isJWT(tokenJwt);
+    if (!tokenJwt || !validToken) {
       throw (new AuthError(textErrorAuthRequired));
     }
     token = tokenJwt;
