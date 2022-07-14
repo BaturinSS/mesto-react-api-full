@@ -13,7 +13,8 @@ function PopupWithForm({
   isValidForm
 }) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen && "popup_opened onValiddator"}`}>
+    <div
+      className={`popup popup_type_${name} ${isOpen && "popup_opened onValidator"}`}>
       <div className="popup__container">
         <button className="popup__close" type="button">
           <img className="popup__image-cross" src={cross} alt="иконка" />
@@ -27,9 +28,14 @@ function PopupWithForm({
         >
           {children}
           <button
-            className={`popup__save-button ${!isValidForm ? "popup__save-button_disabled" : ''}`}
+            className={`popup__save-button ${!isValidForm
+              ? "popup__save-button_disabled"
+              : ''}`
+            }
             type="submit"
-            disabled={isButtonDisabled || !isValidForm ? true : false}
+            disabled={isButtonDisabled || !isValidForm
+              ? true
+              : false}
           >
             {buttonText}
           </button>

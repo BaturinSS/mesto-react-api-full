@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -87,7 +88,7 @@ function App() {
     if (jwt) {
       localStorage.removeItem("jwt");
       setIsLoggedIn(false);
-      history.push('/sign-in');
+      history.push('/sign-in ');
     } else {
       auth
         .deleteToken()
@@ -303,11 +304,11 @@ function App() {
         setIsRegister(true)
       })
       .catch((err) => {
-        err.then(({ error }) => {
+        err.then(({ message }) => {
           setIsButtonDisabled(false)
           setIsOpenPopupMessage(true);
           setIsRegister(false)
-          console.log(`Ошибка регистрации ${error}`)
+          alert(message)
         })
       })
       .finally(() => setIsDownload(false))
@@ -326,14 +327,13 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log(`Ошибка входа ${err.message}`)
-        // err.then(({ message }) => {
-        // setIsButtonDisabled(false);
-        // setIsOpenPopupMessage(true);
-        // setIsLoggedIn(false);
-        // setIsRegister(false);
-        // console.log(`Ошибка входа ${message}`)
-        // });
+        err.then(({ message }) => {
+          setIsButtonDisabled(false);
+          setIsOpenPopupMessage(true);
+          setIsLoggedIn(false);
+          setIsRegister(false);
+          alert(message);
+        });
       })
       .finally(() => setIsDownload(false));
   }

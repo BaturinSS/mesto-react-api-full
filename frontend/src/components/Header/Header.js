@@ -33,19 +33,29 @@ function Header({
 
         <Route exact path="/">
           <p className='header__email'>{email}
-            <Link to="/sign-in" className="header__link-entry header__link-entry_type_color" onClick={onClickExit}>Выйти</Link>
+            <Link
+              to="/sign-in"
+              className="header__link-entry header__link-entry_type_color"
+              onClick={onClickExit}>Выйти
+            </Link>
           </p>
           <img
             className="header__close-menu"
             src={cross}
             alt="символ закрыть"
             onClick={openedMenuMobile}
-            style={isOpenMenuMobile ? { displey: "block" } : { display: "none" }}
+            style={isOpenMenuMobile
+              ? { display: "block" }
+              : { display: "none" }
+            }
           />
           <div
             className="header__menu"
             onClick={openedMenuMobile}
-            style={!isOpenMenuMobile ? { displey: "block" } : { display: "none" }}
+            style={!isOpenMenuMobile
+              ? { display: "block" }
+              : { display: "none" }
+            }
           >
             <div className="header__menu-img"></div>
             <div className="header__menu-img"></div>

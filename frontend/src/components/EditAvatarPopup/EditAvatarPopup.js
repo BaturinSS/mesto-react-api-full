@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useEffect } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import FormValidator from "../FormValidator/FormValidator";
@@ -9,7 +10,10 @@ function EditAvatarPopup({
   isButtonDisabled,
   setIsButtonDisabled
 }) {
-  const { setIsEventInput, setIsOpenForm, isValidForm, isValidInput, isErrorMessage } = FormValidator();
+  const { setIsEventInput,
+    setIsOpenForm, isValidForm,
+    isValidInput, isErrorMessage
+  } = FormValidator();
 
   const { avatarUrlErrorMessage = '' } = isErrorMessage;
 

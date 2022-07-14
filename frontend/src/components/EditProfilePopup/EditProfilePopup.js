@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import { TranslationContext } from '../../contexts/CurrentUserContext';
@@ -11,11 +12,16 @@ function EditProfilePopup({
   isButtonDisabled,
   setIsButtonDisabled
 }) {
-  const { setIsEventInput, setIsOpenForm, isValidForm, isValidInput, isErrorMessage } = FormValidator();
+  const { setIsEventInput,
+    setIsOpenForm, isValidForm,
+    isValidInput, isErrorMessage
+  } = FormValidator();
 
-  const { nameErrorMessage = '', jobErrorMessage = '' } = isErrorMessage;
+  const { nameErrorMessage = '',
+    jobErrorMessage = '' } = isErrorMessage;
 
-  const { nameValidInput = true, jobValidInput = true } = isValidInput;
+  const { nameValidInput = true,
+    jobValidInput = true } = isValidInput;
 
   const [name, setName] = useState({});
 

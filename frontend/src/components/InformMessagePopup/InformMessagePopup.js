@@ -10,13 +10,28 @@ function InformMessagePopup({
   isLoggedIn
 }) {
   return (
-    <div className={`popup popup_type_inform-message ${isOpenPopupMessage && "popup_opened"}`}>
+    <div
+      className={`popup popup_type_inform-message ${isOpenPopupMessage && "popup_opened"}`}
+    >
       <div className="popup__container">
         <button className="popup__close" type="button">
           <img className="popup__image-cross" src={cross} alt="иконка" />
         </button>
-        <img className="popup__image-symbol" src={isRegister || isLoggedIn ? ok : error} alt={isRegister || isLoggedIn ? 'символ подтверждения' : 'символ ошибки'} />
-        <p className='popup__message'>{isRegister || isLoggedIn ? 'Вы успешно зарегистрировались!' : 'Что - то пошло не так! Попробуйте ещё раз.'}</p>
+        <img
+          className="popup__image-symbol"
+          src={isRegister || isLoggedIn
+            ? ok
+            : error}
+          alt={isRegister || isLoggedIn
+            ? 'символ подтверждения'
+            : 'символ ошибки'}
+        />
+        <p
+          className='popup__message'>
+          {isRegister || isLoggedIn
+            ? 'Вы успешно зарегистрировались!'
+            : 'Что - то пошло не так! Попробуйте ещё раз.'}
+        </p>
       </div>
     </div>
   )

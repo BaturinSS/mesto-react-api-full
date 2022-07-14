@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 function FormValidator() {
@@ -12,10 +13,12 @@ function FormValidator() {
   const [isErrorMessage, setIsErrorMessage] = useState({})
 
   useEffect(() => {
-    const popupActive = document.querySelector('.onValiddator');
+    const popupActive =
+      document.querySelector('.onValidator');
 
     if (popupActive) {
-      const formActivePopup = popupActive.querySelector('form');
+      const formActivePopup =
+        popupActive.querySelector('form');
 
       if (!formActivePopup) {
         return

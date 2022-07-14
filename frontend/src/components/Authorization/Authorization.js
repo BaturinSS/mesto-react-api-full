@@ -39,7 +39,7 @@ function Authorization({
   }
 
   return (
-    <div className={`authorization authorization_type_${name} ${isValidFormRegister && "onValiddator"}`}>
+    <div className={`authorization authorization_type_${name} ${isValidFormRegister && "onValidator"}`}>
       <h1 className="authorization__title">{title}</h1>
       <form
         className={`authorization__form authorization__form_type_${name}`}

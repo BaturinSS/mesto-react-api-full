@@ -19,7 +19,7 @@ function Main({
       <section className="profile">
         <div className="profile__figure">
           <div className="profile__ellipse" onClick={onEditAvatar}>
-            <img className="plofile__avatar" src={currentUser.avatar} alt="аватар" /></div>
+            <img className="profile__avatar" src={currentUser.avatar} alt="аватар" /></div>
           <div className="profile__info">
             <div className="profile__group">
               <h1 className="profile__name">{currentUser.name}</h1>
