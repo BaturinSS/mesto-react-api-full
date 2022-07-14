@@ -327,10 +327,10 @@ function App() {
         if (token) {
           localStorage.setItem("jwt", token);
           console.log(message);
-          setIsButtonDisabled(false);
-          history.push('/');
-          setIsLoggedIn(true);
-        }
+        };
+        setIsButtonDisabled(false);
+        history.push('/');
+        setIsLoggedIn(true);
       })
       .catch((err) => {
         err.then(({ message }) => {
