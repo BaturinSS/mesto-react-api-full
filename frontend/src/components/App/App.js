@@ -66,11 +66,15 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       localStorage.removeItem("jwt");
+      setIsLoggedIn(false);
+      history.push('/sign-in');
     } else {
       auth
         .deleteToken()
         .then(({ message }) => {
           console.log(`${message}`);
+          setIsLoggedIn(false);
+          history.push('/sign-in');
         })
         .catch((err) => {
           err.then(({ message }) => {
@@ -78,9 +82,6 @@ function App() {
           })
         })
     }
-
-    setIsLoggedIn(false);
-    history.push('/sign-in');
   }
 
   useEffect(() => {
