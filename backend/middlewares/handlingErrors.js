@@ -1,5 +1,7 @@
 //* Импорт констант
-const { codInternalServerError, textErrorInternalServer } = require('../utils/constants');
+const {
+  codInternalServerError, textErrorInternalServer,
+} = require('../utils/constants');
 
 module.exports = ((err, req, res, next) => {
   const { statusCode = codInternalServerError, message } = err;
