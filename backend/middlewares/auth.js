@@ -21,10 +21,7 @@ module.exports = (req, res, next) => {
       throw new AuthError(textErrorAuthRequired);
     }
     try {
-      return jwt.verify(
-        token,
-        JWT_SECRET,
-      );
+      return jwt.verify(token, JWT_SECRET);
     } catch (err) {
       throw new AuthError(textErrorAuthRequired);
     }

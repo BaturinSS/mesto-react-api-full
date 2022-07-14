@@ -71,11 +71,10 @@ function App() {
       auth
         .checkToken(jwt)
         .then((data) => {
-          const { user, message } = data;
+          const { user } = data;
           setIsEmail(user.email);
           setIsLoggedIn(true);
           history.push('/');
-          console.log(message);
         })
         .catch((err) => {
           err.then(({ message }) => {
@@ -91,7 +90,6 @@ function App() {
       localStorage.removeItem("jwt");
       setIsLoggedIn(false);
       history.push('/sign-in ');
-      console.log('Вы вышли!');
     } else {
       auth
         .deleteToken()
@@ -112,10 +110,9 @@ function App() {
     handleTokenCheck();
     if (isLoggedIn) {
       Promise.all([api.getUserInfo(), api.getCards()])
-        .then(([{ user, message }, cards]) => {
+        .then(([{ user }, cards]) => {
           setCurrentUser(user);
           setCards(cards);
-          console.log(message);
         })
         .catch((err) => {
           err.then(({ message }) => {
@@ -245,7 +242,8 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i === currentUser._id);
+    const isLiked = card.likes
+      .some(i => i === currentUser._id);
 
     const changeLikeCardStatus =
       !isLiked
@@ -254,7 +252,12 @@ function App() {
 
     changeLikeCardStatus
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+        setCards((state) => state
+          .map((c) =>
+            c._id === card._id
+              ? newCard
+              : c
+          ))
       })
       .catch((err) => {
         err.then(({ message }) => {
@@ -375,7 +378,9 @@ function App() {
         <Authorization
           title='Регистрация'
           name='register'
-          buttonText={`${!isDownload ? 'Зарегистрироваться' : 'Регистрирую...'}`}
+          buttonText={`${!isDownload
+            ? 'Зарегистрироваться'
+            : 'Регистрирую...'}`}
           isButtonDisabled={isButtonDisabled}
           setIsButtonDisabled={setIsButtonDisabled}
           onSubmit={onSubmitRegister}
@@ -391,7 +396,9 @@ function App() {
         <Authorization
           title='Вход'
           name='login'
-          buttonText={`${!isDownload ? 'Войти' : 'Проверяю...'}`}
+          buttonText={`${!isDownload
+            ? 'Войти'
+            : 'Проверяю...'}`}
           isButtonDisabled={isButtonDisabled}
           setIsButtonDisabled={setIsButtonDisabled}
           isEmail={isEmail}
