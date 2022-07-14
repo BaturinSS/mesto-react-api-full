@@ -44,22 +44,20 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
-    const { NODE_ENV } = process.env;
     const jwt = localStorage.getItem('jwt');
-    if (jwt || NODE_ENV === 'production') {
-      auth
-        .checkToken(jwt)
-        .then((data) => {
-          setIsEmail(data.email);
-          setIsLoggedIn(true);
-          history.push('/');
+
+    auth
+      .checkToken(jwt)
+      .then((data) => {
+        setIsEmail(data.email);
+        setIsLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err) => {
+        err.then(({ message }) => {
+          console.log(`Ошибка токена "${message}"`)
         })
-        .catch((err) => {
-          err.then(({ message }) => {
-            console.log(`Ошибка токена "${message}"`)
-          })
-        })
-    }
+      })
   }
 
   const handleExit = () => {
@@ -94,7 +92,7 @@ function App() {
         })
         .catch((err) => {
           err.then(({ message }) => {
-            alert(message)
+            console.log(message)
           })
         })
     }

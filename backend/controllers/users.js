@@ -147,7 +147,6 @@ module.exports.login = (req, res, next) => {
       } else {
         res.send({ token });
       }
-      res.send({ message: 'Всё верно!' });
     })
     .catch(next);
 };
@@ -158,8 +157,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(textErrorNoUser);
       }
-      res
-        .send(user);
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -172,11 +170,7 @@ module.exports.getUserInfo = (req, res, next) => {
 module.exports.deleteTokenUser = (req, res, next) => {
   try {
     res
-      .cookie('jwt', '', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none',
-      })
+      .clearCookie('jwt')
       .send({ message: 'Вы вышли!' });
   } catch (err) {
     next(new InternalServerError(textErrorInternalServer));
