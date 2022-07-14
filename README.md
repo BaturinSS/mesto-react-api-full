@@ -4,8 +4,8 @@
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
 ## Ссылка на проект
-[Ссылка на сервер](https://api.server-mesto.ru/)  
-[Ссылка на репозиторий сервера](https://github.com/BaturinSS/express-mesto-gha/)  
----
-[Ссылка на фронтенд](https://server-mesto.ru/)  
-[Ссылка на репозиторий фронтенда](https://github.com/BaturinSS/react-mesto-auth/)  
+###[Ссылка на сервер](https://api.server-mesto.ru/)  
+###[Ссылка на репозиторий сервера](https://github.com/BaturinSS/express-mesto-gha/)  
+
+###[Ссылка на фронтенд](https://server-mesto.ru/)  
+###[Ссылка на репозиторий фронтенда](https://github.com/BaturinSS/react-mesto-auth/)  
