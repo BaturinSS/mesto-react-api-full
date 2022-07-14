@@ -12,7 +12,7 @@ const AuthError = require('../errors/AuthError');
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
-  const { NODE_ENV, JWT_SECRET } = process.env;
+  const { NODE_ENV, JWT_SECRET = 'keyword-for-token-generation' } = process.env;
 
   let token;
 
@@ -43,9 +43,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(
       token,
-      NODE_ENV === 'production'
-        ? JWT_SECRET
-        : 'keyword-for-token-generation',
+      JWT_SECRET,
     );
   } catch (err) {
     next(new AuthError(textErrorAuthRequired));
