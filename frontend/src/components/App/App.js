@@ -323,8 +323,8 @@ function App() {
     auth
       .authorize(password, email)
       .then((data) => {
-        if (data) {
-          const { token, message } = data;
+        const { token, message } = data;
+        if (token) {
           localStorage.setItem("jwt", token);
           console.log(message);
           setIsButtonDisabled(false);
