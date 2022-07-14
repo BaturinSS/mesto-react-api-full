@@ -159,7 +159,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(textErrorNoUser);
       }
-      res.send(user);
+      res.send({ user, message: 'Все верно!' });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

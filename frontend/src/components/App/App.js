@@ -71,9 +71,11 @@ function App() {
       auth
         .checkToken(jwt)
         .then((data) => {
-          setIsEmail(data.email);
+          const { user, message } = data;
+          setIsEmail(user.email);
           setIsLoggedIn(true);
           history.push('/');
+          console.log(message);
         })
         .catch((err) => {
           err.then(({ message }) => {
@@ -89,6 +91,7 @@ function App() {
       localStorage.removeItem("jwt");
       setIsLoggedIn(false);
       history.push('/sign-in ');
+      console.log('Вы вышли!');
     } else {
       auth
         .deleteToken()
@@ -109,9 +112,10 @@ function App() {
     handleTokenCheck();
     if (isLoggedIn) {
       Promise.all([api.getUserInfo(), api.getCards()])
-        .then(([userData, cards]) => {
-          setCurrentUser(userData);
+        .then(([{ user, message }, cards]) => {
+          setCurrentUser(user);
           setCards(cards);
+          console.log(message);
         })
         .catch((err) => {
           err.then(({ message }) => {
@@ -318,8 +322,9 @@ function App() {
     setIsDownload(true);
     auth
       .authorize(password, email)
-      .then(({ token, message }) => {
-        if (token) {
+      .then((data) => {
+        if (data) {
+          const { token, message } = data;
           localStorage.setItem("jwt", token);
           console.log(message);
           setIsButtonDisabled(false);
