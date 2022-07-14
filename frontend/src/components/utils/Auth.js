@@ -64,11 +64,4 @@ class Auth {
   };
 }
 
-export const auth = new Auth({
-  productionUrl: 'https://api.server-mesto.ru',
-  credentials: 'include',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  }
-});
+export default Auth;

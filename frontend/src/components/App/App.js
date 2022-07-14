@@ -6,13 +6,13 @@ import ImagePopup from '../ImagePopup/ImagePopup';
 import React, { useState, useEffect } from "react";
 import { Route, useHistory } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { api } from '../utils/Api';
+import Api from '../utils/Api';
 import { TranslationContext } from '../../contexts/CurrentUserContext';
 import EditProfilePopup from '../EditProfilePopup/EditProfilePopup';
 import EditAvatarPopup from '../EditAvatarPopup/EditAvatarPopup';
 import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import ConfirmDeletePopup from '../ConfirmDeletePopup/ConfirmDeletePopup';
-import { auth } from '../utils/Auth';
+import Auth from '../utils/Auth';
 import InformMessagePopup from '../InformMessagePopup/InformMessagePopup';
 import Authorization from '../Authorization/Authorization';
 
@@ -35,7 +35,26 @@ function App() {
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
   const [isValidFormRegister, setIsValidFormRegister] = useState(true);
-  console.log('isValidFormRegister app front 38', isValidFormRegister)
+
+  const api = new Api({
+    productionUrl: 'https://api.server-mesto.ru',
+    credentials: 'include',
+    headers: {
+      'authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+  });
+
+  const auth = new Auth({
+    productionUrl: 'https://api.server-mesto.ru',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+
   const isOpen =
     isEditAvatarPopupOpen ||
     isEditProfilePopupOpen ||
@@ -47,7 +66,6 @@ function App() {
   const handleTokenCheck = () => {
     const { NODE_ENV } = process.env;
     const jwt = localStorage.getItem('jwt');
-    console.log('app front 51', jwt)
     if (jwt || NODE_ENV === 'production') {
       auth
         .checkToken(jwt)
@@ -302,19 +320,20 @@ function App() {
       .then(({ token }) => {
         if (token) {
           localStorage.setItem("jwt", token);
+          setIsButtonDisabled(false);
+          history.push('/');
+          setIsLoggedIn(true);
         }
-        setIsButtonDisabled(false);
-        history.push('/');
-        setIsLoggedIn(true);
       })
       .catch((err) => {
-        err.then(({ message }) => {
-          setIsButtonDisabled(false);
-          setIsOpenPopupMessage(true);
-          setIsLoggedIn(false);
-          setIsRegister(false);
-          console.log(`Ошибка входа ${message}`)
-        });
+        console.log(`Ошибка входа ${err.message}`)
+        // err.then(({ message }) => {
+        // setIsButtonDisabled(false);
+        // setIsOpenPopupMessage(true);
+        // setIsLoggedIn(false);
+        // setIsRegister(false);
+        // console.log(`Ошибка входа ${message}`)
+        // });
       })
       .finally(() => setIsDownload(false));
   }
