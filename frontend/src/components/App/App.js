@@ -35,6 +35,7 @@ function App() {
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
   const [isValidFormRegister, setIsValidFormRegister] = useState(true);
+  console.log('isValidFormRegister app front 38', isValidFormRegister)
   const isOpen =
     isEditAvatarPopupOpen ||
     isEditProfilePopupOpen ||
@@ -44,20 +45,23 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
+    const { NODE_ENV } = process.env;
     const jwt = localStorage.getItem('jwt');
-
-    auth
-      .checkToken(jwt)
-      .then((data) => {
-        setIsEmail(data.email);
-        setIsLoggedIn(true);
-        history.push('/');
-      })
-      .catch((err) => {
-        err.then(({ message }) => {
-          console.log(`Ошибка токена "${message}"`)
+    console.log('app front 51', jwt)
+    if (jwt || NODE_ENV === 'production') {
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          setIsEmail(data.email);
+          setIsLoggedIn(true);
+          history.push('/');
         })
-      })
+        .catch((err) => {
+          err.then(({ message }) => {
+            console.log(`Ошибка токена "${message}"`)
+          })
+        })
+    }
   }
 
   const handleExit = () => {
@@ -92,7 +96,7 @@ function App() {
         })
         .catch((err) => {
           err.then(({ message }) => {
-            console.log(message)
+            alert(message)
           })
         })
     }

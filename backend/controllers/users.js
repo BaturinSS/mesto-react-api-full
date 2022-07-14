@@ -171,8 +171,7 @@ module.exports.deleteTokenUser = (req, res, next) => {
   try {
     res
       .clearCookie('jwt')
-      .send({ message: 'Вы вышли!' })
-      .end();
+      .send({ message: 'Вы вышли!' });
   } catch (err) {
     next(new InternalServerError(textErrorInternalServer));
   }

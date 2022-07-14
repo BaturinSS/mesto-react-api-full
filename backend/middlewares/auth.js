@@ -23,6 +23,7 @@ module.exports = (req, res, next) => {
       throw (new AuthError(textErrorAuthRequired));
     }
     token = tokenJwt;
+    console.log('auth back 26', token);
   };
 
   const checkedTokenHeaders = () => {
@@ -31,6 +32,7 @@ module.exports = (req, res, next) => {
       throw (new AuthError(textErrorAuthRequired));
     }
     token = authorization.replace(/^\S+/, '').trim();
+    console.log('auth back 26', token);
   };
 
   if (NODE_ENV) {
