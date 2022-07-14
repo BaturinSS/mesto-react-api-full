@@ -11,7 +11,10 @@ const { textErrorAuthRequired } = require('../utils/constants');
 const AuthError = require('../errors/AuthError');
 
 module.exports = (req, res, next) => {
-  const { NODE_ENV, JWT_SECRET } = process.env;
+  const {
+    NODE_ENV,
+    JWT_SECRET = 'keyword-for-token-generation',
+  } = process.env;
 
   const checkedToken = (token) => {
     if (!token || !validator.isJwt(token)) {
@@ -20,15 +23,11 @@ module.exports = (req, res, next) => {
     try {
       return jwt.verify(
         token,
-        NODE_ENV === 'production'
-          ? JWT_SECRET
-          : 'keyword-for-token-generation',
+        JWT_SECRET,
       );
     } catch (err) {
       throw new AuthError(textErrorAuthRequired);
     }
-
-    // token = authorization.replace(/^\S+/, '').trim();
   };
 
   if (NODE_ENV) {
@@ -36,8 +35,9 @@ module.exports = (req, res, next) => {
     req.user = checkedToken(tokenJwt);
   } else {
     const { authorization } = req.headers;
-    // authorization.startsWith('Bearer ')
-    const tokenJwt = authorization ? authorization.substring(7) : null;
+    const tokenJwt = (authorization && authorization.startsWith('Bearer '))
+      ? authorization.substring(7)
+      : null;
     req.user = checkedToken(tokenJwt);
   }
 
