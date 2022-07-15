@@ -93,14 +93,13 @@ function App() {
     } else {
       auth
         .deleteToken()
-        .then(({ message }) => {
-          console.log(`${message}`);
+        .then(() => {
           setIsLoggedIn(false);
           history.push('/sign-in');
         })
         .catch((err) => {
           err.then(({ message }) => {
-            console.log(`Ошибка токена "${message}"`);
+            console.log(message);
           })
         })
     }
@@ -243,13 +242,11 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes
-      .some(i => i === currentUser._id);
-
+      .some(like => like === currentUser._id);
     const changeLikeCardStatus =
       !isLiked
         ? api.addLike(card._id)
         : api.deleteLike(card._id)
-
     changeLikeCardStatus
       .then((newCard) => {
         setCards((state) => state
