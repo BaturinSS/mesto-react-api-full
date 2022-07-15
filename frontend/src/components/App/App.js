@@ -36,24 +36,32 @@ function App() {
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
   const [isValidFormRegister, setIsValidFormRegister] = useState(true);
+  const { NODE_ENV } = process.env;
+  const fillHeaders = () => {
+    const basicHeaders = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+    if (NODE_ENV !== 'production') {
+      return {
+        ...basicHeaders,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      }
+    } else {
+      return basicHeaders;
+    }
+  }
 
   const api = new Api({
     productionUrl: 'https://api.server-mesto.ru',
     credentials: 'include',
-    headers: {
-      'authorization': `Bearer ${localStorage.getItem('jwt')}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    }
+    headers: fillHeaders(),
   });
 
   const auth = new Auth({
     productionUrl: 'https://api.server-mesto.ru',
     credentials: 'include',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
+    headers: fillHeaders(),
   });
 
   const isOpen =
