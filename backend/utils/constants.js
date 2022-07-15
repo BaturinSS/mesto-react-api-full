@@ -33,3 +33,6 @@ module.exports.textErrorAccess = 'Можно удалять, только сво
 
 //* Сохраним в константу текст ошибки 'Такой пользователь уже существует!'
 module.exports.textErrorConflict = 'Такой пользователь уже существует!';
+
+//* Ключевая фраза для создания токена при разработке
+module.exports.keywordTokenDev = 'keyword-for-token-generation';

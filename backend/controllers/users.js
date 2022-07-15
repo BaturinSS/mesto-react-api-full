@@ -10,7 +10,7 @@ const User = require('../models/user');
 //* Импорт констант
 const {
   codCreated, textErrorNoUser, textErrorInternalServer,
-  textErrorValidation, textErrorConflict,
+  textErrorValidation, textErrorConflict, keywordTokenDev,
 } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
@@ -125,16 +125,14 @@ module.exports.createUser = (req, res, next) => {
 //* Контроллер аутентификации(вход в приложение)
 //* router.post('/sign-in', login)
 module.exports.login = (req, res, next) => {
-  const { NODE_ENV, JWT_SECRET } = process.env;
+  const { NODE_ENV, JWT_SECRET = keywordTokenDev } = process.env;
   User
     .findUserByCredentials(req.body)
     .then((user) => {
       const production = NODE_ENV === 'production';
       const token = jwt.sign(
         { _id: user._id },
-        production
-          ? JWT_SECRET
-          : 'keyword-for-token-generation',
+        JWT_SECRET,
         { expiresIn: '7d' },
       );
       if (production) {

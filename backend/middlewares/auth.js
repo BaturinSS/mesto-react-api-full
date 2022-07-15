@@ -2,16 +2,13 @@
 const jwt = require('jsonwebtoken');
 
 //* Импорт констант
-const { textErrorAuthRequired } = require('../utils/constants');
+const { textErrorAuthRequired, keywordTokenDev } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
 const AuthError = require('../errors/AuthError');
 
 module.exports = (req, res, next) => {
-  const {
-    NODE_ENV,
-    JWT_SECRET = 'keyword-for-token-generation',
-  } = process.env;
+  const { NODE_ENV, JWT_SECRET = keywordTokenDev } = process.env;
 
   const checkedToken = (token) => {
     if (!token) {

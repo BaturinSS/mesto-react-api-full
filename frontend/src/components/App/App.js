@@ -78,7 +78,7 @@ function App() {
         })
         .catch((err) => {
           err.then(({ message }) => {
-            console.log(`Ошибка токена "${message}"`)
+            console.log(message)
           })
         })
     }

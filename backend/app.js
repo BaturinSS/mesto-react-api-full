@@ -18,9 +18,10 @@ const cookieParser = require('cookie-parser');
 //* Подключаем обработчик ошибок валидации celebrate
 const { errors } = require('celebrate');
 
-//* Подключаем модуль ограничения запросов к серверу
-const rateLimit = require('express-rate-limit');
+//* Подключаем конфигурационный файл 'express-rate-limit'
+const { limiter } = require('./utils/limiterConfig');
 
+//* Подключаем обработку запроса CORS
 const cors = require('./middlewares/cors');
 
 //* Подключаем обработчик router
@@ -35,23 +36,22 @@ const app = express();
 //* Подключаем модуль для логирования
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const { DATA_BASE = 'mongodb://localhost:27017/mestodb' } = process.env;
+
 //* Подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/mestodb');
+mongoose.connect(DATA_BASE);
 
 //* Импорт мидлвэр централизованной обработки ошибок
 const handlingErrors = require('./middlewares/handlingErrors');
-
-//* Ограничение количества запросов к серверу
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
 
 //* Обрабатывает CORS запрос OPTIONS
 app.options('*', cors);
 
 //* Обрабатывает CORS запроса
 app.use(cors);
+
+//* Подключаем логгер запросов
+app.use(requestLogger);
 
 //* Обрабатываем количество запросов к серверу
 app.use(limiter);
@@ -65,9 +65,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //* Обрабатываем куки через модуль cookie-parser
 app.use(cookieParser());
-
-//* Подключаем логгер запросов
-app.use(requestLogger);
 
 //* Обрабатываем все routes
 app.use(routes);
