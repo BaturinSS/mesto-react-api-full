@@ -23,7 +23,13 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   return (
     <li className="elements__element">
-      <button type="button" className="elements__delete" style={isOwn ? { visibility: "visible" } : { visibility: "hidden" }} onClick={handleDeleteClick}>
+      <button type="button"
+        className="elements__delete"
+        style={isOwn
+          ? { visibility: "visible" }
+          : { visibility: "hidden" }}
+        onClick={handleDeleteClick}
+      >
         <img className="elements__image-delete" src={imageBasket} alt="иконка" />
       </button>
       <figure className="elements__rectangle">
