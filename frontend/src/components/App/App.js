@@ -42,6 +42,7 @@ function App() {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     }
+    console.log(NODE_ENV)
     if (NODE_ENV !== 'production') {
       return {
         ...basicHeaders,
