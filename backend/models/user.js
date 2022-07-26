@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 //* Подключаем модуль для проверки данных на тип
-const validatorjs = require('validator');
+const validatorJS = require('validator');
 
 //* Импорт констант
 const { textErrorNoValidEmailPassword } = require('../utils/constants');
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     validate: {
-      validator: (value) => validatorjs.isEmail(value),
+      validator: (value) => validatorJS.isEmail(value),
     },
   },
   password: {
