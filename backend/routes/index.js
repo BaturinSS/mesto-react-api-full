@@ -19,9 +19,6 @@ const auth = require('../middlewares/auth');
 //* Импорт классового элемента ошибки
 const NotFoundError = require('../errors/NotFoundError');
 
-//* Импорт констант
-const { textErrorNotFound } = require('../utils/constants');
-
 router
   //* Краш-тест сервера
   .get('/crash-test', () => {
@@ -48,7 +45,7 @@ router
   .use('/users', usersRouter)
   .use('/cards', cardsRouter)
   .use('/', (req, res, next) => {
-    next(new NotFoundError(textErrorNotFound));
+    next(new NotFoundError());
   });
 
 //* Экспортировали роутер
