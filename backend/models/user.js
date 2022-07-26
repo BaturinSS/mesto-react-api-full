@@ -52,22 +52,20 @@ const userSchema = new mongoose.Schema({
 });
 
 //* Собственные метод модели
-// eslint-disable-next-line func-names
-userSchema.statics.findUserByCredentials = function ({ email, password }) {
-  return this.findOne({ email }).select('+password')
-    .then((user) => {
-      if (!user) {
-        throw new AuthError(textErrorNoValidEmailPassword);
-      }
-      return bcrypt.compare(password, user.password)
-        .then((matched) => {
-          if (!matched) {
-            throw new AuthError(textErrorNoValidEmailPassword);
-          }
-          return user;
-        });
-    });
-};
+userSchema.statics.findUserByCredentials = ({ email, password }) => this
+  .findOne({ email }).select('+password')
+  .then((user) => {
+    if (!user) {
+      throw new AuthError(textErrorNoValidEmailPassword);
+    }
+    return bcrypt.compare(password, user.password)
+      .then((matched) => {
+        if (!matched) {
+          throw new AuthError(textErrorNoValidEmailPassword);
+        }
+        return user;
+      });
+  });
 
 //* Создаем модель данных в mongoose
 module.exports = mongoose.model('user', userSchema);
