@@ -3,7 +3,7 @@ const {
   NODE_ENV,
   PORT = 3000,
   URL_CORS = 'http://localhost:3106',
-  JWT_SECRET = 'keyword-for-token-generation',
+  JWT_SECRET = 'keyword-for-token-generation-develop',
   DATA_BASE = 'mongodb://localhost:27017/mestodb',
 } = process.env;
 
@@ -31,9 +31,6 @@ module.exports.textErrorInternalServer = 'На сервере произошла
 
 //* Сохраним в константу текст ошибки 'Карточка удалена'
 module.exports.textMessageDeleteCard = 'Карточка удалена';
-
-//* Ключевая фраза для создания токена при разработке
-module.exports.keywordTokenDev = 'keyword-for-token-generation';
 
 //* Вынес в константы регулярное выражение для проверки URL
 module.exports.regExURL = /^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/;
