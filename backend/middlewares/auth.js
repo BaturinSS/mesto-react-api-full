@@ -8,11 +8,7 @@ const { keywordTokenDev } = require('../utils/constants');
 const AuthError = require('../errors/AuthError');
 
 module.exports = (req, res, next) => {
-<<<<<<< Updated upstream
   const { NODE_ENV, JWT_SECRET = keywordTokenDev } = process.env;
-=======
-  const { NODE_ENV, JWT_SECRET } = process.env;
->>>>>>> Stashed changes
 
   const checkedToken = (token) => {
     if (!token) {
