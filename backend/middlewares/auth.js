@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 //* Импорт констант
-const { textErrorAuthRequired, keywordTokenDev } = require('../utils/constants');
+const { keywordTokenDev } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
 const AuthError = require('../errors/AuthError');
@@ -12,12 +12,12 @@ module.exports = (req, res, next) => {
 
   const checkedToken = (token) => {
     if (!token) {
-      throw new AuthError(textErrorAuthRequired);
+      throw new AuthError();
     }
     try {
       return jwt.verify(token, JWT_SECRET);
     } catch (err) {
-      throw new AuthError(textErrorAuthRequired);
+      throw new AuthError();
     }
   };
 
