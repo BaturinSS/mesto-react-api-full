@@ -42,14 +42,11 @@ class Auth {
       .then(this._checkResponse)
   };
 
-  checkToken(token) {
+  checkToken() {
     return fetch(`${this._baseUrl()}/users/me`, {
       method: 'GET',
       credentials: this._credentials,
-      headers: this._headers = {
-        ...this._headers,
-        'Authorization': `Bearer ${token}` && this._NODE_ENV !== 'production'
-      }
+      headers: this._headers,
     })
       .then(this._checkResponse);
   };

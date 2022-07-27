@@ -71,11 +71,10 @@ function App() {
     isOpenPopupMessage
 
   const handleTokenCheck = () => {
-    const { NODE_ENV } = process.env;
     const jwt = localStorage.getItem('jwt');
     if (jwt || NODE_ENV === 'production') {
       auth
-        .checkToken(jwt)
+        .checkToken()
         .then((data) => {
           const { user } = data;
           setIsEmail(user.email);
