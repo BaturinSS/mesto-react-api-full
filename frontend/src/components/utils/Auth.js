@@ -3,12 +3,12 @@ class Auth {
     this._productionUrl = productionUrl;
     this._headers = headers;
     this._credentials = credentials;
+    this._NODE_ENV = process.env.NODE_ENV;
   }
 
   _baseUrl = () => {
-    const { NODE_ENV } = process.env;
     let url = '';
-    if (NODE_ENV === 'production') {
+    if (this._NODE_ENV === 'production') {
       url = this._productionUrl;
     } else {
       url = 'http://localhost:3000';
@@ -48,7 +48,7 @@ class Auth {
       credentials: this._credentials,
       headers: this._headers = {
         ...this._headers,
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}` && this._NODE_ENV !== 'production'
       }
     })
       .then(this._checkResponse);
