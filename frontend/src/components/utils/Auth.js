@@ -1,15 +1,14 @@
 class Auth {
-  constructor({ productionUrl, headers, credentials }) {
-    this._productionUrl = productionUrl;
+  constructor({ headers, NODE_ENV }) {
     this._headers = headers;
-    this._credentials = credentials;
-    this._NODE_ENV = process.env.NODE_ENV;
+    this._credentials = 'include';
+    this._NODE_ENV = NODE_ENV;
   }
 
   _baseUrl = () => {
     let url = '';
     if (this._NODE_ENV === 'production') {
-      url = this._productionUrl;
+      url = 'https://api.server-mesto.ru';
     } else {
       url = 'http://localhost:3000';
     };

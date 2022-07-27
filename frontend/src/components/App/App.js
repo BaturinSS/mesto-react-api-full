@@ -17,6 +17,7 @@ import Auth from '../utils/Auth';
 import InformMessagePopup from '../InformMessagePopup/InformMessagePopup';
 import Authorization from '../Authorization/Authorization';
 
+import { NODE_ENV } from '../utils/constants';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -36,30 +37,31 @@ function App() {
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
   const [isValidFormRegister, setIsValidFormRegister] = useState(true);
-  const { NODE_ENV } = process.env;
 
-  let basicHeaders = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  }
 
-  if (NODE_ENV !== 'production') {
-    basicHeaders = {
-      ...basicHeaders,
-      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+  const createdHeaders = () => {
+    let basicHeaders = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+    if (NODE_ENV !== 'production') {
+      return basicHeaders = {
+        ...basicHeaders,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+      };
+    } else {
+      return basicHeaders;
     }
   }
 
   const api = new Api({
-    productionUrl: 'https://api.server-mesto.ru',
-    credentials: 'include',
-    headers: basicHeaders,
+    headers: createdHeaders(),
+    NODE_ENV: NODE_ENV,
   });
 
   const auth = new Auth({
-    productionUrl: 'https://api.server-mesto.ru',
-    credentials: 'include',
-    headers: basicHeaders,
+    headers: createdHeaders(),
+    NODE_ENV: NODE_ENV,
   });
 
   const isOpen =
