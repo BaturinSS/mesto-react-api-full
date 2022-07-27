@@ -3,8 +3,9 @@ const Card = require('../models/card');
 
 //* Импорт констант
 const {
-  codCreated, textErrorNoCard,
-  textMessageDeleteCard,
+  codCreated,
+  textErrorValidation, textMessageDeleteCard,
+  textErrorAccess, textErrorNoCard,
 } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
@@ -39,7 +40,7 @@ module.exports.createCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError());
+        next(new ValidationError(textErrorValidation));
       } else {
         next(err);
       }
@@ -52,7 +53,7 @@ module.exports.deleteCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError(textErrorNoCard);
       } else if (card.owner.toHexString() !== req.user._id) {
-        throw new AccessError();
+        throw new AccessError(textErrorAccess);
       }
       card.remove()
         .then(() => {

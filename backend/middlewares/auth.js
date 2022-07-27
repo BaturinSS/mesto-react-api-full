@@ -15,12 +15,7 @@ module.exports = (req, res, next) => {
       throw new AuthError();
     }
     try {
-      return jwt.verify(
-        token,
-        NODE_ENV === 'production'
-          ? JWT_SECRET
-          : 'keyword-for-token-generation',
-      );
+      return jwt.verify(token, JWT_SECRET);
     } catch (err) {
       throw new AuthError();
     }
@@ -31,7 +26,9 @@ module.exports = (req, res, next) => {
     req.user = checkedToken(tokenJwt);
   } else {
     const { authorization } = req.headers;
-    const tokenJwt = (authorization && authorization.startsWith('Bearer ')) ? authorization.substring(7) : null;
+    const tokenJwt = (authorization && authorization.startsWith('Bearer '))
+      ? authorization.substring(7)
+      : null;
     req.user = checkedToken(tokenJwt);
   }
 

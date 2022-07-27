@@ -28,8 +28,11 @@ module.exports.textErrorValidation = 'Введены некорректные д
 //* Сохраним в константу текст ошибки 'Карточка удалена'
 module.exports.textMessageDeleteCard = 'Карточка удалена';
 
+//* Сохраним в константу текст ошибки 'Можно удалять только свои карточки!'
+module.exports.textErrorAccess = 'Можно удалять, только свои карточки!';
+
+//* Сохраним в константу текст ошибки 'Такой пользователь уже существует!'
+module.exports.textErrorConflict = 'Такой пользователь уже существует!';
+
 //* Ключевая фраза для создания токена при разработке
 module.exports.keywordTokenDev = 'keyword-for-token-generation';
-
-//* Сохраним в константу текст сообщения 'Всё верно!'
-module.exports.textMessageOk = 'Всё верно!';

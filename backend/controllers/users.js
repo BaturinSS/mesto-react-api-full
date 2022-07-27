@@ -9,14 +9,19 @@ const User = require('../models/user');
 
 //* Импорт констант
 const {
-  codCreated, keywordTokenDev,
-  textMessageOk, textErrorNoUser,
+  codCreated, textErrorNoUser, textErrorInternalServer,
+  textErrorValidation, textErrorConflict, keywordTokenDev,
 } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
 const NotFoundError = require('../errors/NotFoundError');
+
+//* Импорт классового элемента ошибки
 const ValidationError = require('../errors/ValidationError');
+
+//* Импорт классового элемента ошибки
 const ConflictError = require('../errors/ConflictError');
+
 const InternalServerError = require('../errors/InternalServerError');
 
 //* Экспорт функций в routes
@@ -56,7 +61,7 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError());
+        next(new ValidationError(textErrorValidation));
       } else {
         next(err);
       }
@@ -77,7 +82,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError());
+        next(new ValidationError(textErrorValidation));
       } else {
         next(err);
       }
@@ -107,9 +112,9 @@ module.exports.createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            next(new ValidationError());
+            next(new ValidationError(textErrorValidation));
           } else if (err.name === 'MongoServerError') {
-            next(new ConflictError());
+            next(new ConflictError(textErrorConflict));
           } else {
             next(err);
           }
@@ -124,12 +129,13 @@ module.exports.login = (req, res, next) => {
   User
     .findUserByCredentials(req.body)
     .then((user) => {
+      const production = NODE_ENV === 'production';
       const token = jwt.sign(
         { _id: user._id },
         JWT_SECRET,
         { expiresIn: '7d' },
       );
-      if (NODE_ENV === 'production') {
+      if (production) {
         res
           .cookie('jwt', token, {
             maxAge: 3600000 * 24 * 7,
@@ -137,9 +143,9 @@ module.exports.login = (req, res, next) => {
             secure: true,
             sameSite: 'none',
           })
-          .send({ message: textMessageOk });
+          .send({ message: 'Все верно!' });
       } else {
-        res.send({ token, message: textMessageOk });
+        res.send({ token, message: 'Все верно!' });
       }
     })
     .catch(next);
@@ -151,11 +157,11 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(textErrorNoUser);
       }
-      res.send({ user, message: textMessageOk });
+      res.send({ user, message: 'Все верно!' });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError());
+        next(new ValidationError(textErrorValidation));
       } else {
         next(err);
       }
@@ -167,6 +173,6 @@ module.exports.deleteTokenUser = (req, res, next) => {
       .clearCookie('jwt')
       .send({ message: 'Вы вышли!' });
   } catch (err) {
-    next(new InternalServerError());
+    next(new InternalServerError(textErrorInternalServer));
   }
 };

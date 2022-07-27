@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 //* Подключаем модуль для проверки данных на тип
-const validatorJS = require('validator');
+const validatorjs = require('validator');
 
 //* Импорт констант
 const { textErrorNoValidEmailPassword } = require('../utils/constants');
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     validate: {
-      validator: (value) => validatorJS.isEmail(value),
+      validator: (value) => validatorjs.isEmail(value),
     },
   },
   password: {
@@ -52,20 +52,22 @@ const userSchema = new mongoose.Schema({
 });
 
 //* Собственные метод модели
-userSchema.statics.findUserByCredentials = ({ email, password }) => this
-  .findOne({ email }).select('+password')
-  .then((user) => {
-    if (!user) {
-      throw new AuthError(textErrorNoValidEmailPassword);
-    }
-    return bcrypt.compare(password, user.password)
-      .then((matched) => {
-        if (!matched) {
-          throw new AuthError(textErrorNoValidEmailPassword);
-        }
-        return user;
-      });
-  });
+// eslint-disable-next-line func-names
+userSchema.statics.findUserByCredentials = function ({ email, password }) {
+  return this.findOne({ email }).select('+password')
+    .then((user) => {
+      if (!user) {
+        throw new AuthError(textErrorNoValidEmailPassword);
+      }
+      return bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            throw new AuthError(textErrorNoValidEmailPassword);
+          }
+          return user;
+        });
+    });
+};
 
 //* Создаем модель данных в mongoose
 module.exports = mongoose.model('user', userSchema);

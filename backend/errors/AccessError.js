@@ -1,5 +1,5 @@
 class AccessError extends Error {
-  constructor(message = 'Можно удалять, только свои карточки!') {
+  constructor(message) {
     super(message);
     this.statusCode = 403;
   }
