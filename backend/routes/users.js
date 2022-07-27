@@ -4,6 +4,9 @@ const router = require('express').Router();
 //* Подключаем валидацию Joi в качестве мидлвэр, будем использовать библиотеку celebrate
 const { celebrate, Joi } = require('celebrate');
 
+//* Импорт констант
+const { regExURL } = require('../utils/constants');
+
 //* Импорт функций controllers
 const {
   getUsers, getUser, getUserInfo,
@@ -27,7 +30,7 @@ router
   }), updateUser)
   .patch('/me/avatar', celebrate({
     body: Joi.object().keys({
-      avatar: Joi.string().required().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/),
+      avatar: Joi.string().required().regex(regExURL),
     }),
   }), updateUserAvatar)
   .delete('/me', deleteTokenUser);

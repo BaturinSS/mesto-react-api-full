@@ -4,9 +4,14 @@ const router = require('express').Router();
 //* Подключаем валидацию Joi в качестве мидлвэр, будем использовать библиотеку celebrate
 const { celebrate, Joi } = require('celebrate');
 
+//* Импорт констант
+const { regExURL } = require('../utils/constants');
+
 //* Импорт функций controllers
 const {
-  getCards, createCard, deleteCard, likeCard, dislikeCard,
+  getCards, createCard,
+  deleteCard, likeCard,
+  dislikeCard,
 } = require('../controllers/cards');
 
 //* Принимаем запросы
@@ -15,7 +20,7 @@ router
   .post('/', celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
-      link: Joi.string().required().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/),
+      link: Joi.string().required().regex(regExURL),
     }),
   }), createCard)
   .put('/:cardId/likes', celebrate({

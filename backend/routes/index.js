@@ -20,7 +20,7 @@ const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/NotFoundError');
 
 //* Импорт констант
-const { textErrorNotFound } = require('../utils/constants');
+const { textErrorNotFound, regExURL } = require('../utils/constants');
 
 router
   //* Краш-тест сервера
@@ -39,7 +39,7 @@ router
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().uri().regex(/^(https?:\/\/(www\.)?([a-zA-z0-9-]{1}[a-zA-z0-9-]*\.?)*\.{1}([a-zA-z0-9]){2,8}(\/?([a-zA-z0-9-])*\/?)*\/?([-._~:?#[]@!\$&'\(\)\*\+,;=])*)/),
+      avatar: Joi.string().uri().regex(regExURL),
       password: Joi.string().required(),
       email: Joi.string().required().email(),
     }),

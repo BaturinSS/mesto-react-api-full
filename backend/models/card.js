@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 //* Подключаем модуль для проверки данных на тип
-const validatorjs = require('validator');
+const validatorJS = require('validator');
 
 //* Создаем схему для валидации данных в MongoDB
 const cardSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (value) => validatorjs.isURL(value),
+      validator: (value) => validatorJS.isURL(value),
     },
   },
   owner: {

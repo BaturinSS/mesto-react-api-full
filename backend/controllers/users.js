@@ -9,8 +9,8 @@ const User = require('../models/user');
 
 //* Импорт констант
 const {
-  codCreated, textErrorNoUser, textErrorInternalServer,
-  textErrorValidation, textErrorConflict, keywordTokenDev,
+  codCreated, textErrorNoUser,
+  keywordTokenDev,
 } = require('../utils/constants');
 
 //* Импорт классового элемента ошибки
@@ -61,7 +61,7 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError(textErrorValidation));
+        next(new ValidationError());
       } else {
         next(err);
       }
@@ -82,7 +82,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError(textErrorValidation));
+        next(new ValidationError());
       } else {
         next(err);
       }
@@ -112,9 +112,9 @@ module.exports.createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.name === 'ValidationError') {
-            next(new ValidationError(textErrorValidation));
+            next(new ValidationError());
           } else if (err.name === 'MongoServerError') {
-            next(new ConflictError(textErrorConflict));
+            next(new ConflictError());
           } else {
             next(err);
           }
@@ -161,7 +161,7 @@ module.exports.getUserInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new ValidationError(textErrorValidation));
+        next(new ValidationError());
       } else {
         next(err);
       }
@@ -173,6 +173,6 @@ module.exports.deleteTokenUser = (req, res, next) => {
       .clearCookie('jwt')
       .send({ message: 'Вы вышли!' });
   } catch (err) {
-    next(new InternalServerError(textErrorInternalServer));
+    next(new InternalServerError());
   }
 };
