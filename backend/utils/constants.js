@@ -13,8 +13,8 @@ module.exports.textErrorNoCard = 'Такой карточки нет';
 //* Сохраним в константу текст ошибки 'Неправильно указан логин или пароль'
 module.exports.textErrorNoValidEmailPassword = 'Неправильные почта или пароль';
 
-//* Сохраним в константу текст ошибки 'Необходима авторизация'
-module.exports.textErrorAuthRequired = 'Необходима авторизация';
+// //* Сохраним в константу текст ошибки 'Необходима авторизация'
+// module.exports.textErrorAuthRequired = 'Необходима авторизация';
 
 //* Сохраним в константу текст ошибки 'На сервере произошла ошибка'
 module.exports.textErrorInternalServer = 'На сервере произошла ошибка';
