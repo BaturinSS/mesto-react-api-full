@@ -1,3 +1,16 @@
+//* Вынес переменные окружения в общие константы
+const {
+  NODE_ENV,
+  PORT = 3000,
+  URL_CORS = 'http://localhost:3106',
+  JWT_SECRET = 'keyword-for-token-generation',
+  DATA_BASE = 'mongodb://localhost:27017/mestodb',
+} = process.env;
+
+module.exports = {
+  NODE_ENV, JWT_SECRET, URL_CORS, PORT, DATA_BASE,
+};
+
 //* Сохраняем в константу код ответа «создано»
 module.exports.codCreated = 201;
 
