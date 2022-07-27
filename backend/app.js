@@ -27,16 +27,14 @@ const cors = require('./middlewares/cors');
 //* Подключаем обработчик router
 const routes = require('./routes/index');
 
-//* Возьмём порт (по умолчанию 3000) из переменной окружения
-const { PORT = 3000 } = process.env;
+//* Импорт констант
+const { PORT, DATA_BASE } = require('./utils/constants');
 
 //* Создаем приложение методом express
 const app = express();
 
 //* Подключаем модуль для логирования
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const { DATA_BASE = 'mongodb://localhost:27017/mestodb' } = process.env;
 
 //* Подключаемся к серверу mongo
 mongoose.connect(DATA_BASE);
