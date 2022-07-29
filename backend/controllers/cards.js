@@ -54,7 +54,8 @@ module.exports.deleteCard = (req, res, next) => {
       } else if (card.owner.toHexString() !== req.user._id) {
         throw new AccessError();
       }
-      card.remove()
+      card
+        .remove()
         .then(() => {
           res
             .send({ message: textMessageDeleteCard, card });
