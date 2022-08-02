@@ -95,8 +95,9 @@ function EditProfilePopup({
           value={description || ''}
         />
         <span className={`userProfession-input-error popup__input-error ${!jobValidInput ? "popup__input-error_active" : ''}`}>{jobErrorMessage}</span>
-      </>
-      )
+      </PopupWithForm>
+    </>
+  )
 }
 
-      export default EditProfilePopup;
+export default EditProfilePopup;
