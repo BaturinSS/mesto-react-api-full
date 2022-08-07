@@ -33,7 +33,7 @@ function App() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isOpenPopupMessage, setIsOpenPopupMessage] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isEmail, setIsEmail] = useState('')
+  const [isEmail, setIsEmail] = useState('');
   const history = useHistory();
   const [isRegister, setIsRegister] = useState(false);
   const [isValidFormRegister, setIsValidFormRegister] = useState(true);
@@ -77,8 +77,7 @@ function App() {
     if (jwt || NODE_ENV === 'production') {
       auth
         .checkToken()
-        .then((data) => {
-          const { user } = data;
+        .then(({ user }) => {
           setIsEmail(user.email);
           setIsLoggedIn(true);
           history.push('/');
