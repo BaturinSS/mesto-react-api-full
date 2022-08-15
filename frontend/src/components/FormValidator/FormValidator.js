@@ -21,7 +21,7 @@ function FormValidator() {
         popupActive.querySelector('form');
 
       if (!formActivePopup) {
-        return
+        return;
       } else {
         setIsValidForm(formActivePopup.checkValidity());
       }
@@ -49,7 +49,7 @@ function FormValidator() {
 
       setIsValidForm(isEventInput.target.closest('form').checkValidity());
     }
-  }, [isEventInput])
+  }, [isEventInput]);
 
   return {
     setIsEventInput,
@@ -57,7 +57,7 @@ function FormValidator() {
     isValidInput,
     isValidForm,
     isErrorMessage
-  }
+  };
 }
 
 export default FormValidator;

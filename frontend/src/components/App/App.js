@@ -212,7 +212,7 @@ function App() {
     setSelectedCard(null);
     setIsOpenPopupMessage(false)
     setIsValidFormRegister(true);
-  }
+  };
 
   const handleUpdateUser = (name, about) => {
     setIsDownload(true);
@@ -224,11 +224,11 @@ function App() {
       })
       .catch((err) => {
         err.then((res) => {
-          alert(res.message)
-        })
+          alert(res.message);
+        });
       })
-      .finally(() => setIsDownload(false))
-  }
+      .finally(() => setIsDownload(false));
+  };
 
   const handleEditAvatar = ({ avatar }) => {
     setIsDownload(true);
@@ -240,11 +240,11 @@ function App() {
       })
       .catch((err) => {
         err.then(({ message }) => {
-          alert(message)
-        })
+          alert(message);
+        });
       })
-      .finally(() => setIsDownload(false))
-  }
+      .finally(() => setIsDownload(false));
+  };
 
   function handleCardLike(card) {
     const isLiked = card.likes
@@ -252,7 +252,7 @@ function App() {
     const changeLikeCardStatus =
       !isLiked
         ? api.addLike(card._id)
-        : api.deleteLike(card._id)
+        : api.deleteLike(card._id);
     changeLikeCardStatus
       .then((newCard) => {
         setCards((state) => state
@@ -260,14 +260,14 @@ function App() {
             c._id === card._id
               ? newCard
               : c
-          ))
+          ));
       })
       .catch((err) => {
         err.then(({ message }) => {
-          alert(message)
-        })
-      })
-  }
+          alert(message);
+        });
+      });
+  };
 
   function handleCardDelete(card) {
     setIsDownload(true);
@@ -275,14 +275,14 @@ function App() {
       .deleteCard(card._id)
       .then(() => {
         closeAllPopups();
-        setIsUpdateCards(!isUpdateCards)
+        setIsUpdateCards(!isUpdateCards);
       })
       .catch((err) => {
         err.then((res) => {
-          alert(res.message)
-        })
+          alert(res.message);
+        });
       })
-      .finally(() => setIsDownload(false))
+      .finally(() => setIsDownload(false));
   }
 
   const handleAddPlaceSubmit = (name, link) => {
@@ -292,14 +292,14 @@ function App() {
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
-        setIsUpdateCards(!isUpdateCards)
+        setIsUpdateCards(!isUpdateCards);
       })
       .catch((err) => {
         err.then((res) => {
-          alert(res.message)
-        })
+          alert(res.message);
+        });
       })
-      .finally(() => setIsDownload(false))
+      .finally(() => setIsDownload(false));
   };
 
   const onSubmitRegister = (password, email) => {

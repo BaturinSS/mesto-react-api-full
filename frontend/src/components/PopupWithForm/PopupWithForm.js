@@ -1,5 +1,7 @@
-import React from "react";
 import './PopupWithForm.css';
+
+import React from "react";
+
 import cross from '../../images/image-cross.svg';
 
 function PopupWithForm({
