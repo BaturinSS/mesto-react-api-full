@@ -33,7 +33,7 @@
 ---
 
 ## Ссылка на проект
-### [Ссылка на сервер](https://api.mesto.novo52ru)  
+### [Ссылка на сервер](https://api.mesto.novo52.ru)  
 ### [Ссылка на репозиторий сервера](https://github.com/BaturinSS/mesto-api)  
 
 ### [Ссылка на фронтенд](https://mesto.novo52.ru/)  
