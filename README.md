@@ -33,8 +33,8 @@
 ---
 
 ## Ссылка на проект
-### [Ссылка на сервер](https://api.server-mesto.ru/)  
-### [Ссылка на репозиторий сервера](https://github.com/BaturinSS/express-mesto-gha/)  
+### [Ссылка на сервер](https://api.mesto.novo52ru)  
+### [Ссылка на репозиторий сервера](https://github.com/BaturinSS/express-mesto-gha)  
 
 ### [Ссылка на фронтенд](https://server-mesto.ru/)  
-### [Ссылка на репозиторий фронтенда](https://github.com/BaturinSS/react-mesto-auth/)  
+### [Ссылка на репозиторий фронтенда](https://github.com/BaturinSS/react-mesto-auth)  
